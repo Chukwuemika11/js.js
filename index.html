@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order List</title>
+  <style>
+    .order {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    .items {
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="orders-container"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const ordersContainer = document.getElementById('orders-container');
+
+      // Simulated data for orders
+      const orders = [
+        { id: 1, user: 'chukwuemika', orderedDate: '2023-08-01', status: 'Being delivered' },
+        { id: 2, user: 'john_doe', orderedDate: '2023-08-02', status: 'Received' }
+      ];
+
+      // Simulated data for order items
+      const orderItems = {
+        1: [
+          { product: 'Product 1', quantity: 2 },
+          { product: 'Product 2', quantity: 1 }
+        ],
+        2: [
+          { product: 'Product 3', quantity: 3 }
+        ]
+      };
+
+      // Function to display orders and their items
+      function displayOrdersAndItems() {
+        orders.forEach(order => {
+          const orderDiv = document.createElement('div');
+          orderDiv.classList.add('order');
+          orderDiv.innerHTML = `
+            <h3>Order ID: ${order.id}</h3>
+            <p>User: ${order.user}</p>
+            <p>Ordered Date: ${order.orderedDate}</p>
+            <p>Status: ${order.status}</p>
+            <div class="items">
+              <h4>Items:</h4>
+              <ul>
+                ${orderItems[order.id].map(item => `<li>${item.product} - Quantity: ${item.quantity}</li>`).join('')}
+              </ul>
+            </div>
+          `;
+          ordersContainer.appendChild(orderDiv);
+        });
+      }
+
+      // Display the orders and items
+      displayOrdersAndItems();
+    });
+  </script>
+</body>
+</html>
